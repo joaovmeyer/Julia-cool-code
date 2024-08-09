@@ -79,6 +79,23 @@ begin
   end
 
 
+
+function estimateLegendreRoots(n)
+
+	term = (1. / (8. * n * n * n) - 1. / (8. * n * n) + 1.);
+
+	roots = [];
+	for k = 1:n
+		theta = (n - k + 0.75) / (n + 0.5) * pi;
+		root = term * cos(theta);
+
+		push!(roots, root);
+	end
+
+	return roots;
+end
+
+
   # returns all the points and their correspondant weights for gaussian quadrature
   function GaussQuadraturePointsAndWeights(n)
   
