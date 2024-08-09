@@ -95,6 +95,29 @@ function estimateLegendreRoots(n)
 	return roots;
 end
 
+function NewtonPolynomial(x, coeffs, maxIter, eps = 1e-20)
+	n = length(coeffs);
+
+	for iter = 1:maxIter
+		b = coeffs[n];
+		c = b;
+
+		for i = n-1:-1:2
+			b = coeffs[i] + b * x;
+			c = b + c * x;
+		end
+		b = coeffs[1] + b * x;
+
+		x -= b / c;
+		
+		if (b <= eps)
+			break;
+		end
+	end
+
+	return x;
+end
+
 
   # returns all the points and their correspondant weights for gaussian quadrature
   function GaussQuadraturePointsAndWeights(n)
